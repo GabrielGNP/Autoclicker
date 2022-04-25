@@ -33,13 +33,12 @@ namespace WindowsControlerCliker
             this.CambiarBoton = new System.Windows.Forms.Button();
             this.AutoCliker = new System.Windows.Forms.GroupBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.CheckActivar = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label211 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.label111 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -68,8 +67,9 @@ namespace WindowsControlerCliker
             this.abrirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.minimizarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cerrarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CPSIngreser = new System.Windows.Forms.TextBox();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.AutoCliker.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -89,14 +89,14 @@ namespace WindowsControlerCliker
             // AutoCliker
             // 
             this.AutoCliker.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.AutoCliker.Controls.Add(this.CPSIngreser);
             this.AutoCliker.Controls.Add(this.label12);
-            this.AutoCliker.Controls.Add(this.checkBox3);
+            this.AutoCliker.Controls.Add(this.CheckActivar);
             this.AutoCliker.Controls.Add(this.checkBox2);
             this.AutoCliker.Controls.Add(this.label11);
             this.AutoCliker.Controls.Add(this.label4);
             this.AutoCliker.Controls.Add(this.label3);
             this.AutoCliker.Controls.Add(this.label211);
-            this.AutoCliker.Controls.Add(this.numericUpDown1);
             this.AutoCliker.Controls.Add(this.checkBox1);
             this.AutoCliker.Controls.Add(this.label111);
             this.AutoCliker.Controls.Add(this.CambiarBoton);
@@ -125,18 +125,18 @@ namespace WindowsControlerCliker
             this.label12.Text = "label12";
             this.label12.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // checkBox3
+            // CheckActivar
             // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Checked = true;
-            this.checkBox3.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox3.Font = new System.Drawing.Font("Arial Unicode MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox3.Location = new System.Drawing.Point(85, 55);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(60, 19);
-            this.checkBox3.TabIndex = 11;
-            this.checkBox3.Text = "Activar";
-            this.checkBox3.UseVisualStyleBackColor = true;
+            this.CheckActivar.AutoSize = true;
+            this.CheckActivar.Checked = true;
+            this.CheckActivar.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.CheckActivar.Font = new System.Drawing.Font("Arial Unicode MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CheckActivar.Location = new System.Drawing.Point(85, 55);
+            this.CheckActivar.Name = "CheckActivar";
+            this.CheckActivar.Size = new System.Drawing.Size(60, 19);
+            this.CheckActivar.TabIndex = 11;
+            this.CheckActivar.Text = "Activar";
+            this.CheckActivar.UseVisualStyleBackColor = true;
             // 
             // checkBox2
             // 
@@ -174,34 +174,21 @@ namespace WindowsControlerCliker
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Arial Unicode MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(68, 112);
+            this.label3.Location = new System.Drawing.Point(68, 103);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(34, 15);
+            this.label3.Size = new System.Drawing.Size(29, 15);
             this.label3.TabIndex = 5;
-            this.label3.Text = "Clic/s";
+            this.label3.Text = "CPS";
             // 
             // label211
             // 
             this.label211.AutoSize = true;
             this.label211.Font = new System.Drawing.Font("Arial Unicode MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label211.Location = new System.Drawing.Point(68, 97);
+            this.label211.Location = new System.Drawing.Point(69, 88);
             this.label211.Name = "label211";
             this.label211.Size = new System.Drawing.Size(104, 15);
             this.label211.TabIndex = 4;
             this.label211.Text = "Frecuencia de Clics";
-            // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Font = new System.Drawing.Font("Arial Unicode MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDown1.Location = new System.Drawing.Point(6, 97);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(56, 22);
-            this.numericUpDown1.TabIndex = 3;
-            this.numericUpDown1.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             // 
             // checkBox1
             // 
@@ -275,7 +262,6 @@ namespace WindowsControlerCliker
             this.label16.Size = new System.Drawing.Size(77, 15);
             this.label16.TabIndex = 23;
             this.label16.Text = "Coordenada X";
-            this.label16.Enter += new System.EventHandler(this.C);
             // 
             // CoordY
             // 
@@ -500,23 +486,36 @@ namespace WindowsControlerCliker
             // abrirToolStripMenuItem
             // 
             this.abrirToolStripMenuItem.Name = "abrirToolStripMenuItem";
-            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.abrirToolStripMenuItem.Text = "Abrir";
             this.abrirToolStripMenuItem.Click += new System.EventHandler(this.abrirToolStripMenuItem_Click);
             // 
             // minimizarToolStripMenuItem
             // 
             this.minimizarToolStripMenuItem.Name = "minimizarToolStripMenuItem";
-            this.minimizarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.minimizarToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.minimizarToolStripMenuItem.Text = "Minimizar";
             this.minimizarToolStripMenuItem.Click += new System.EventHandler(this.minimizarToolStripMenuItem_Click);
             // 
             // cerrarToolStripMenuItem
             // 
             this.cerrarToolStripMenuItem.Name = "cerrarToolStripMenuItem";
-            this.cerrarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.cerrarToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.cerrarToolStripMenuItem.Text = "Cerrar";
             this.cerrarToolStripMenuItem.Click += new System.EventHandler(this.cerrarToolStripMenuItem_Click);
+            // 
+            // CPSIngreser
+            // 
+            this.CPSIngreser.Location = new System.Drawing.Point(16, 90);
+            this.CPSIngreser.Name = "CPSIngreser";
+            this.CPSIngreser.Size = new System.Drawing.Size(47, 22);
+            this.CPSIngreser.TabIndex = 13;
+            this.CPSIngreser.Text = "10";
+            this.CPSIngreser.TextChanged += new System.EventHandler(this.CPSIngreser_TextChanged);
+            // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             // 
             // Form1
             // 
@@ -529,10 +528,10 @@ namespace WindowsControlerCliker
             this.Controls.Add(this.AutoCliker);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.SizeChanged += new System.EventHandler(this.Form1_SizeChanged);
             this.AutoCliker.ResumeLayout(false);
             this.AutoCliker.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
@@ -545,7 +544,6 @@ namespace WindowsControlerCliker
         private System.Windows.Forms.Button CambiarBoton;
         private System.Windows.Forms.GroupBox AutoCliker;
         private System.Windows.Forms.Label label111;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Label label211;
         private System.Windows.Forms.Label label4;
@@ -568,7 +566,7 @@ namespace WindowsControlerCliker
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.CheckBox checkBox3;
+        private System.Windows.Forms.CheckBox CheckActivar;
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label15;
@@ -580,6 +578,8 @@ namespace WindowsControlerCliker
         private System.Windows.Forms.ToolStripMenuItem abrirToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem minimizarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cerrarToolStripMenuItem;
+        private System.Windows.Forms.TextBox CPSIngreser;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
 
