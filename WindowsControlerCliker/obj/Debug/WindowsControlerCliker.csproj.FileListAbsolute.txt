@@ -1,0 +1,10 @@
+D:\ControlerCliker\WindowsControlerCliker\WindowsControlerCliker\bin\Debug\WindowsControlerCliker.exe.config
+D:\ControlerCliker\WindowsControlerCliker\WindowsControlerCliker\bin\Debug\WindowsControlerCliker.exe
+D:\ControlerCliker\WindowsControlerCliker\WindowsControlerCliker\bin\Debug\WindowsControlerCliker.pdb
+D:\ControlerCliker\WindowsControlerCliker\WindowsControlerCliker\obj\Debug\WindowsControlerCliker.csproj.AssemblyReference.cache
+D:\ControlerCliker\WindowsControlerCliker\WindowsControlerCliker\obj\Debug\WindowsControlerCliker.Form1.resources
+D:\ControlerCliker\WindowsControlerCliker\WindowsControlerCliker\obj\Debug\WindowsControlerCliker.Properties.Resources.resources
+D:\ControlerCliker\WindowsControlerCliker\WindowsControlerCliker\obj\Debug\WindowsControlerCliker.csproj.GenerateResource.cache
+D:\ControlerCliker\WindowsControlerCliker\WindowsControlerCliker\obj\Debug\WindowsControlerCliker.csproj.CoreCompileInputs.cache
+D:\ControlerCliker\WindowsControlerCliker\WindowsControlerCliker\obj\Debug\WindowsControlerCliker.exe
+D:\ControlerCliker\WindowsControlerCliker\WindowsControlerCliker\obj\Debug\WindowsControlerCliker.pdb
