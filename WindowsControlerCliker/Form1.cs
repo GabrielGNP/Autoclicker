@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Threading;
+using KeysDetectorSegundoPlano;
 
 namespace WindowsControlerCliker
 {
@@ -25,12 +26,66 @@ namespace WindowsControlerCliker
         [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
         public static extern void mouse_event(int dwFlags, int dx, int dy, int cButtons, int dwExtraInfo);
 
+        KeysDetectorSP kh = new KeysDetectorSP();
+        bool ctrl, shift;
         public Form1()
         {
             InitializeComponent();
             notifyIcon1.Icon = SystemIcons.Application; //Crea el icono de sistema en notificacion
+
+            //==
+            kh.KeyDown += Kh_KeyDown;
+            kh.KeyUp += Kh_KeyUp;
+
+
         }
+        int ContadorClickL = 0;
+        int ContadorTeclas = 0;
+        private void CLick(object sender, System.Windows.Forms.KeyEventArgs e)
+        {
+            if (GetAsyncKeyState(Keys.LButton)<0)
+            {
+                ContadorClickL++;
+                ClicksIzquierdo.Text = ContadorClickL.ToString();
+            }
+        }
+
+
+        private void Kh_KeyUp(object sender, System.Windows.Forms.KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.LControlKey || e.KeyCode == Keys.RControlKey) ctrl = false;
+            if (e.KeyCode == Keys.LShiftKey || e.KeyCode == Keys.RShiftKey) shift = false;
+            if (e.KeyCode == Keys.T && e.KeyCode == Keys.LControlKey)
+            {
+               
+                MessageBox.Show("A soltado control shift T");
+            }
+            ContadorTeclas++;
+            PulsacionTeclaCont.Text = ContadorTeclas.ToString();
+        }
+        
+        private void Kh_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
+        {
+           
+            if (e.KeyCode == Keys.LControlKey || e.KeyCode == Keys.RControlKey) ctrl = true;
+            if (e.KeyCode == Keys.LShiftKey || e.KeyCode == Keys.RShiftKey) shift = true;
+            if (e.KeyCode == Keys.R && ctrl == true)
+            {
+                MessageBox.Show("A presionado control shift R");
+            }
+            
+
+        }
+
         //_____________________________________________________________________
+        //======================================================================
+        //======================================================================
+        //========== FUNCION DE Deteccion de teclas fuera del programa =========
+        //========== para el contador de teclas ===============================
+        //======================================================================
+        //======================================================================
+
+
 
 
 
@@ -155,8 +210,8 @@ namespace WindowsControlerCliker
                         IndicadorDeActividad.ForeColor = Color.Lime;
                         IndicadorDeActividad.Text = "| ACTIVO |";
                         
-                        
                     }
+              
 
                     Thread.Sleep(1);
                 }
@@ -223,6 +278,27 @@ namespace WindowsControlerCliker
         private void DetectorTeclas_DoWork(object sender, DoWorkEventArgs e)
         {
            
-        }
+        }     
+
+
     }
 }
+
+
+// Material de conocimientos
+/*
+ * Autocliker
+ * https://www.youtube.com/watch?v=-DqX8fT1DrA
+ * https://www.youtube.com/watch?v=LSDceJ3197Q
+ * 
+ * https://www.youtube.com/watch?v=Ax2eHqB8WGo
+ * 
+ * 
+ * Detectar teclas
+ * https://www.youtube.com/watch?v=rZPw87iGdLo
+ * https://www.youtube.com/watch?v=-2sypfmYXD4
+ * 
+ * 
+ * Detectar Mouse
+ * 
+ * */

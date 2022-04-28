@@ -62,7 +62,6 @@ namespace WindowsControlerCliker
             this.label8 = new System.Windows.Forms.Label();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBox3111 = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
@@ -72,6 +71,7 @@ namespace WindowsControlerCliker
             this.cerrarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.DetectorTeclas = new System.ComponentModel.BackgroundWorker();
+            this.PulsacionTeclaCont = new System.Windows.Forms.Label();
             this.AutoCliker.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CPSIngreser)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -267,6 +267,7 @@ namespace WindowsControlerCliker
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.groupBox1.Controls.Add(this.PulsacionTeclaCont);
             this.groupBox1.Controls.Add(this.ClicksDerecho);
             this.groupBox1.Controls.Add(this.ClicksIzquierdo);
             this.groupBox1.Controls.Add(this.label15);
@@ -284,7 +285,6 @@ namespace WindowsControlerCliker
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.textBox4);
             this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.textBox3111);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Font = new System.Drawing.Font("Arial Unicode MS", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -496,18 +496,6 @@ namespace WindowsControlerCliker
             this.label7.TabIndex = 11;
             this.label7.Text = "Pulsaciones de teclado";
             // 
-            // textBox3111
-            // 
-            this.textBox3111.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.textBox3111.Font = new System.Drawing.Font("Arial Unicode MS", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3111.ForeColor = System.Drawing.Color.Blue;
-            this.textBox3111.Location = new System.Drawing.Point(276, 29);
-            this.textBox3111.Name = "textBox3111";
-            this.textBox3111.Size = new System.Drawing.Size(100, 22);
-            this.textBox3111.TabIndex = 10;
-            this.textBox3111.Text = "100000";
-            this.textBox3111.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -576,6 +564,22 @@ namespace WindowsControlerCliker
             this.DetectorTeclas.WorkerSupportsCancellation = true;
             this.DetectorTeclas.DoWork += new System.ComponentModel.DoWorkEventHandler(this.DetectorTeclas_DoWork);
             // 
+            // PulsacionTeclaCont
+            // 
+            this.PulsacionTeclaCont.AutoSize = true;
+            this.PulsacionTeclaCont.BackColor = System.Drawing.Color.Silver;
+            this.PulsacionTeclaCont.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.PulsacionTeclaCont.Font = new System.Drawing.Font("Arial Unicode MS", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PulsacionTeclaCont.ForeColor = System.Drawing.Color.Blue;
+            this.PulsacionTeclaCont.Location = new System.Drawing.Point(276, 32);
+            this.PulsacionTeclaCont.MaximumSize = new System.Drawing.Size(100, 18);
+            this.PulsacionTeclaCont.MinimumSize = new System.Drawing.Size(100, 18);
+            this.PulsacionTeclaCont.Name = "PulsacionTeclaCont";
+            this.PulsacionTeclaCont.Size = new System.Drawing.Size(100, 18);
+            this.PulsacionTeclaCont.TabIndex = 27;
+            this.PulsacionTeclaCont.Text = "0";
+            this.PulsacionTeclaCont.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -620,7 +624,6 @@ namespace WindowsControlerCliker
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBox3111;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button4;
@@ -645,6 +648,7 @@ namespace WindowsControlerCliker
         private System.ComponentModel.BackgroundWorker DetectorTeclas;
         private System.Windows.Forms.Label ClicksDerecho;
         private System.Windows.Forms.Label ClicksIzquierdo;
+        private System.Windows.Forms.Label PulsacionTeclaCont;
     }
 }
 
