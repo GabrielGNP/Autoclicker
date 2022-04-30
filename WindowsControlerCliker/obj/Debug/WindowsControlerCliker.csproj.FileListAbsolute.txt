@@ -11,3 +11,4 @@ D:\ControlerCliker\WindowsControlerCliker\WindowsControlerCliker\obj\Debug\Windo
 D:\ControlerCliker\WindowsControlerCliker\WindowsControlerCliker\bin\Debug\KeysDetectorSegundoPlano.dll
 D:\ControlerCliker\WindowsControlerCliker\WindowsControlerCliker\bin\Debug\KeysDetectorSegundoPlano.pdb
 D:\ControlerCliker\WindowsControlerCliker\WindowsControlerCliker\obj\Debug\WindowsControlerCliker.csproj.CopyComplete
+D:\ControlerCliker\WindowsControlerCliker\WindowsControlerCliker\bin\Debug\Gma.System.MouseKeyHook.dll

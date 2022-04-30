@@ -9,14 +9,22 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Threading;
-using KeysDetectorSegundoPlano;
+using KeysDetectorSegundoPlano; // Se encuentra en la carpeta
+                                // C:\Users\USUARIO\source\repos\KeysDetectorSegundoPlano
+                                // C:\Users\USUARIO\source\repos\KeysDetectorSegundoPlano\KeysDetectorSegundoPlano\bin\Debug
+
+
 
 namespace WindowsControlerCliker
 {
   
     public partial class Form1 : Form
     {
+       
+
         
+
+
 
         //_____________________________________________________________________
         // Necesario para el uso de las teclas
@@ -26,33 +34,79 @@ namespace WindowsControlerCliker
         [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
         public static extern void mouse_event(int dwFlags, int dx, int dy, int cButtons, int dwExtraInfo);
 
-        KeysDetectorSP kh = new KeysDetectorSP();
+        KeysDetectorSP KH = new KeysDetectorSP();
+        MouseDetectorSP MH = new MouseDetectorSP();
         bool ctrl, shift;
+ 
+
         public Form1()
         {
             InitializeComponent();
             notifyIcon1.Icon = SystemIcons.Application; //Crea el icono de sistema en notificacion
 
             //==
-            kh.KeyDown += Kh_KeyDown;
-            kh.KeyUp += Kh_KeyUp;
+            KH.KeyDown += Kh_KeyDown;
+            KH.KeyUp += Kh_KeyUp;
+
+            MH.ClickDown += MH_ClickDown;
+            MH.ClickUp += MH_ClickUp;
+
+          
 
 
         }
-        int ContadorClickL = 0;
-        int ContadorTeclas = 0;
-        private void CLick(object sender, System.Windows.Forms.KeyEventArgs e)
+
+
+        //======================================================================
+        //======================================================================
+        //========== CONTADOR DE USOS DE TECLADO Y MOUSE =============
+        //======================================================================
+        //======================================================================
+
+        
+        private void MH_ClickUp(object sender, System.Windows.Forms.KeyEventArgs e)
         {
-            if (GetAsyncKeyState(Keys.LButton)<0)
+            //ContadorClickL++;
+            //ClicksIzquierdoCont.Text = ContadorClickL.ToString();
+
+           // MessageBox.Show(e.KeyCode.ToString());
+            if (e.KeyData == Keys.XButton1)
             {
-                ContadorClickL++;
-                ClicksIzquierdo.Text = ContadorClickL.ToString();
+               // MessageBox.Show("XB1");  
+            }
+            if (e.KeyCode == Keys.XButton2)
+            {
+                //MessageBox.Show("XB2");
+            }
+        }
+
+        private void MH_ClickDown(object sender, System.Windows.Forms.KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.XButton1)
+            {
+               // MessageBox.Show("XB1");
+            }
+            if (e.KeyCode == Keys.XButton2)
+            {
+                //MessageBox.Show("XB2");
             }
         }
 
 
+        //_____________________________________________________________________
+        //======================================================================
+        //======================================================================
+        //========== FUNCION DE Deteccion de teclas fuera del programa =========
+        //========== para el contador de teclas ===============================
+        //======================================================================
+        //======================================================================
+
+
+        int ContadorTeclas = 0;
+      
         private void Kh_KeyUp(object sender, System.Windows.Forms.KeyEventArgs e)
         {
+            
             if (e.KeyCode == Keys.LControlKey || e.KeyCode == Keys.RControlKey) ctrl = false;
             if (e.KeyCode == Keys.LShiftKey || e.KeyCode == Keys.RShiftKey) shift = false;
             if (e.KeyCode == Keys.T && e.KeyCode == Keys.LControlKey)
@@ -71,19 +125,15 @@ namespace WindowsControlerCliker
             if (e.KeyCode == Keys.LShiftKey || e.KeyCode == Keys.RShiftKey) shift = true;
             if (e.KeyCode == Keys.R && ctrl == true)
             {
-                MessageBox.Show("A presionado control shift R");
+               // MessageBox.Show("A presionado control shift R");
             }
-            
-
+            if (e.KeyCode == Keys.Z && ctrl == true)
+            {
+                //MessageBox.Show("A presionado control shift Z");
+            }
         }
 
-        //_____________________________________________________________________
-        //======================================================================
-        //======================================================================
-        //========== FUNCION DE Deteccion de teclas fuera del programa =========
-        //========== para el contador de teclas ===============================
-        //======================================================================
-        //======================================================================
+
 
 
 
@@ -144,7 +194,7 @@ namespace WindowsControlerCliker
         private const int LEFTUP = 0x0004;  //Comando para soltar el click 
         private const int LEFTDOWN = 0x0002; //Comando para hacer click
         public decimal intervals = 10; //Indica la frecuencia de clicks que se haran
-        public bool Click = false; //Activa o desactiva la ejecucion de la funcion de los clicks automaticos
+        public new bool Click = false; //Activa o desactiva la ejecucion de la funcion de los clicks automaticos
         int CountClicks = 0; //Cuenta la cantidad de clicks automaticos que se han dado
 
         bool CambiarTecla = false;
@@ -171,7 +221,7 @@ namespace WindowsControlerCliker
                     mouse_event(dwFlags: LEFTUP, dx: 0, dy: 0, cButtons: 0, dwExtraInfo: 0);
                     
                     Thread.Sleep(787 / (int.Parse(intervals.ToString())));
-                    CPS.Text = intervals.ToString();
+                  
                         //(1000 / (int.Parse(intervals.ToString()))).ToString();
                     CountClicks++;
                     ClicksHechos.Text = CountClicks.ToString();
@@ -187,39 +237,146 @@ namespace WindowsControlerCliker
             {
                 if (CheckActivar.Checked && CambiarTecla == false && ActivadorClick.Checked)
                 {
-
                     //Es una funcion para detectar las teclas. Al no ejecutarse al tocar una tecla en el
                     // form, sino que se ejecuta al tocar una tecla sin importar si se toca en el form o
                     // fuera del form, se necesita una funcion que detecte las teclas.
-                    if (GetAsyncKeyState(bindings) < 0 && Click == true /*|| GetAsyncKeyState(Keys.Down) < 0*/)
+                    if (ControlActivate.Checked)
                     {
-                        Thread.Sleep(100);
-                        Click = false;
-                        //MessageBox.Show("inactivo");
-                        IndicadorDeActividad.ForeColor = Color.OrangeRed;
-                        IndicadorDeActividad.Text = "| INACTIVO |";
-                        
-                        
+                        if (ShiftActivate.Checked)
+                        {
+                            if (GetAsyncKeyState(bindings) < 0 && 
+                               (GetAsyncKeyState(Keys.LShiftKey) < 0 || GetAsyncKeyState(Keys.RShiftKey) < 0) &&
+                               (GetAsyncKeyState(Keys.LControlKey) < 0 || GetAsyncKeyState(Keys.RControlKey) < 0) &&
+                                Click == true )
+                            {
+                                Thread.Sleep(100);
+                                Click = false;
+                                //MessageBox.Show("inactivo");
+                                IndicadorDeActividad.ForeColor = Color.OrangeRed;
+                                IndicadorDeActividad.Text = "| INACTIVO |";
+                            }
+                            else if (GetAsyncKeyState(bindings) < 0 && 
+                                    (GetAsyncKeyState(Keys.LShiftKey) < 0 || GetAsyncKeyState(Keys.RShiftKey) < 0) &&
+                                    (GetAsyncKeyState(Keys.LControlKey) < 0 || GetAsyncKeyState(Keys.RControlKey) < 0) &&
+                                     Click == false )
+                            {
+                                Thread.Sleep(100);
+                                //MessageBox.Show("activo");
+                                CountClicks = 0;
+                                Click = true;
+                                IndicadorDeActividad.ForeColor = Color.Lime;
+                                IndicadorDeActividad.Text = "| ACTIVO |";
+                            }
+                        }
+                        else
+                        {
+                            if (GetAsyncKeyState(bindings) < 0 &&
+                               (GetAsyncKeyState(Keys.LControlKey) < 0 || GetAsyncKeyState(Keys.RControlKey) < 0) &&
+                                Click == true)
+                            {
+                                Thread.Sleep(100);
+                                Click = false;
+                                //MessageBox.Show("inactivo");
+                                IndicadorDeActividad.ForeColor = Color.OrangeRed;
+                                IndicadorDeActividad.Text = "| INACTIVO |";
+                            }
+                            else if (GetAsyncKeyState(bindings) < 0 &&
+                                    (GetAsyncKeyState(Keys.LControlKey) < 0 || GetAsyncKeyState(Keys.RControlKey) < 0) &&
+                                     Click == false)
+                            {
+                                Thread.Sleep(100);
+                                //MessageBox.Show("activo");
+                                CountClicks = 0;
+                                Click = true;
+                                IndicadorDeActividad.ForeColor = Color.Lime;
+                                IndicadorDeActividad.Text = "| ACTIVO |";
+                            }
+                        }
                     }
-                    else if (GetAsyncKeyState(bindings) < 0 && Click == false /*|| GetAsyncKeyState(Keys.Up) < 0*/)
+                    else
                     {
-                        Thread.Sleep(100);
-                        //MessageBox.Show("activo");
-                        CountClicks = 0;
-                        Click = true;
-                        IndicadorDeActividad.ForeColor = Color.Lime;
-                        IndicadorDeActividad.Text = "| ACTIVO |";
-                        
+                        if (ShiftActivate.Checked)
+                        {
+                            if (GetAsyncKeyState(bindings) < 0 &&
+                               (GetAsyncKeyState(Keys.LShiftKey) < 0 || GetAsyncKeyState(Keys.RShiftKey) < 0) &&
+                                Click == true)
+                            {
+                                Thread.Sleep(100);
+                                Click = false;
+                                //MessageBox.Show("inactivo");
+                                IndicadorDeActividad.ForeColor = Color.OrangeRed;
+                                IndicadorDeActividad.Text = "| INACTIVO |";
+                            }
+                            else if (GetAsyncKeyState(bindings) < 0 && 
+                                    (GetAsyncKeyState(Keys.LShiftKey) < 0 || GetAsyncKeyState(Keys.RShiftKey) < 0) && 
+                                     Click == false )
+                            {
+                                Thread.Sleep(100);
+                                //MessageBox.Show("activo");
+                                CountClicks = 0;
+                                Click = true;
+                                IndicadorDeActividad.ForeColor = Color.Lime;
+                                IndicadorDeActividad.Text = "| ACTIVO |";
+                            }
+                        }
+                        else
+                        {
+                            if (GetAsyncKeyState(bindings) < 0 && Click == true)
+                            {
+                                Thread.Sleep(100);
+                                Click = false;
+                                //MessageBox.Show("inactivo");
+                                IndicadorDeActividad.ForeColor = Color.OrangeRed;
+                                IndicadorDeActividad.Text = "| INACTIVO |";
+                            }
+                            else if (GetAsyncKeyState(bindings) < 0 && Click == false)
+                            {
+                                Thread.Sleep(100);
+                                //MessageBox.Show("activo");
+                                CountClicks = 0;
+                                Click = true;
+                                IndicadorDeActividad.ForeColor = Color.Lime;
+                                IndicadorDeActividad.Text = "| ACTIVO |";
+                            }
+                        }
                     }
-              
 
+                    
                     Thread.Sleep(1);
                 }
+           
+                /*
+                if (GetKeyState(Keys.XButton1) == KeyStates.Down)
+                {
+                   // MessageBox.Show("XB1");
+                   if (DownB)
+                    {
+                        ContadorClickXB1++;
+                        ClicksExtra1Cont.Text = ContadorClickXB1.ToString();
+                        DownB = false;
+                    }
+                    ContadorClickXB1++;
+                    ClicksExtra1Cont.Text = ContadorClickXB1.ToString();
+
+                }
+                if (GetKeyState(Keys.XButton2) == KeyStates.Down)
+                {
+                    if (DownB)
+                    {
+                        ContadorClickXB2++;
+                        ClicksExtra2Cont.Text = ContadorClickXB2.ToString();
+                        DownB = false;
+                    }
+                    //MessageBox.Show("XB2");
+                    ContadorClickXB2++;
+                    ClicksExtra2Cont.Text = ContadorClickXB2.ToString();
+                }*/
                 Thread.Sleep(1);
             }
         }
+        
 
-
+       
 
         //===== ===== ===== ===== Obtiene la frecuencia de clicks por segundo ===== ===== ===== =====
         private void CPSIngreser_ValueChanged(object sender, EventArgs e)
@@ -241,12 +398,12 @@ namespace WindowsControlerCliker
                 KeyAsignada = e.KeyCode;
                 KeyAsigned.Text = e.KeyData.ToString();
                 CambiarTecla = false;
-                MessageBox.Show(KeyAsignada.ToString());
+                //MessageBox.Show(KeyAsignada.ToString());
                 if (KeyAsigned.Text != "..." && KeyAsigned.Text != "none")
                 {
                     bindings = (Keys)Key.ConvertFromString(KeyAsigned.Text);
                 }
-                MessageBox.Show(bindings.ToString());
+                //MessageBox.Show(bindings.ToString());
 
             }
             
@@ -258,29 +415,56 @@ namespace WindowsControlerCliker
             {//Activo
                 ActivadorClick.BackColor = Color.LimeGreen;
                 //ActivadorClick.ForeColor = Color.Black;
-                ActivadorClick.Text = "ACTIVO";
+                ActivadorClick.Text = "HABILITADO";
+                CambiarBoton.Enabled = false;
+                //ControlActivate.Enabled = false;
+                //ShiftActivate.Enabled = false;
                 CPSIngreser.Enabled = false;
+                CheckActivar.Enabled = false;
             }
             else
             {//Inactivo
                 ActivadorClick.BackColor = Color.Maroon;
                 //ActivadorClick.ForeColor = Color.White;
-                ActivadorClick.Text = "INACTIVO";
+                ActivadorClick.Text = "INHABILITADO";
+                CambiarBoton.Enabled = true;
+                //ControlActivate.Enabled = true;
+                //ShiftActivate.Enabled = true;
                 CPSIngreser.Enabled = true;
+                CheckActivar.Enabled = true;
             }
         }
 
-        //======================================================================
-        //======================================================================
-        //========== CONTADOR DE USOS DE TECLADO Y MOUSE =============
-        //======================================================================
-        //======================================================================
-        private void DetectorTeclas_DoWork(object sender, DoWorkEventArgs e)
+        int ContadorClickL = 0; //Click Izquierdo
+        int ContadorClickR = 0; //Click Derecho
+        int ContadorClickM = 0; //Click Central
+        int ContadorClickXB1 = 0; //Click boton extra 1 del mouse
+        int ContadorClickXB2 = 0; //Click boton extra 2 del mouse
+        int ContadorRueda = 0; //Rueda del raton
+
+       
+
+        private void Actualizador_Tick(object sender, EventArgs e)
         {
-           
-        }     
+            ContadorClickL = MH.ClI;
+            ClicksIzquierdoCont.Text = ContadorClickL.ToString();
+
+            ContadorClickR = MH.ClD;
+            ClicksDerechoCont.Text = ContadorClickR.ToString();
+
+            ContadorClickM = MH.CMR;
+            ClicksCentralCont.Text = ContadorClickM.ToString();
+
+            ContadorRueda = MH.RdR;
+            RuedaRatonCont.Text = ContadorRueda.ToString();
 
 
+            ContadorClickXB1 = MH.BX1;
+            ClicksExtra1Cont.Text = ContadorClickXB1.ToString();
+            ContadorClickXB2 = MH.BX2;
+            ClicksExtra1Cont.Text = ContadorClickXB2.ToString();
+
+        }
     }
 }
 
@@ -300,5 +484,15 @@ namespace WindowsControlerCliker
  * 
  * 
  * Detectar Mouse
+ * https://www.youtube.com/watch?v=yYMtqatuqxg&t=17s
+ * https://www.youtube.com/watch?v=tA9r95ZxZGI
  * 
- * */
+ * 
+ * https://gist.github.com/Dalgona/275ebc861eeac74c1a8d9d437d220f3b
+ * 
+ * 
+ * TEST DE VELOCIDAD DE AUTOCLICKER
+ * https://www.arealme.com/click-speed-test/es/
+ * 
+ * 
+ */

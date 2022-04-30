@@ -1,0 +1,13 @@
+D:\ControlerCliker\WindowsControlerCliker\WindowsControlerCliker\bin\Release\WindowsControlerCliker.exe.config
+D:\ControlerCliker\WindowsControlerCliker\WindowsControlerCliker\bin\Release\WindowsControlerCliker.exe
+D:\ControlerCliker\WindowsControlerCliker\WindowsControlerCliker\bin\Release\WindowsControlerCliker.pdb
+D:\ControlerCliker\WindowsControlerCliker\WindowsControlerCliker\bin\Release\KeysDetectorSegundoPlano.dll
+D:\ControlerCliker\WindowsControlerCliker\WindowsControlerCliker\bin\Release\KeysDetectorSegundoPlano.pdb
+D:\ControlerCliker\WindowsControlerCliker\WindowsControlerCliker\obj\Release\WindowsControlerCliker.Form1.resources
+D:\ControlerCliker\WindowsControlerCliker\WindowsControlerCliker\obj\Release\WindowsControlerCliker.Properties.Resources.resources
+D:\ControlerCliker\WindowsControlerCliker\WindowsControlerCliker\obj\Release\WindowsControlerCliker.csproj.GenerateResource.cache
+D:\ControlerCliker\WindowsControlerCliker\WindowsControlerCliker\obj\Release\WindowsControlerCliker.csproj.CoreCompileInputs.cache
+D:\ControlerCliker\WindowsControlerCliker\WindowsControlerCliker\obj\Release\WindowsControlerCliker.csproj.CopyComplete
+D:\ControlerCliker\WindowsControlerCliker\WindowsControlerCliker\obj\Release\WindowsControlerCliker.exe
+D:\ControlerCliker\WindowsControlerCliker\WindowsControlerCliker\obj\Release\WindowsControlerCliker.pdb
+D:\ControlerCliker\WindowsControlerCliker\WindowsControlerCliker\obj\Release\WindowsControlerCliker.csproj.AssemblyReference.cache
