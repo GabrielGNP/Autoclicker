@@ -435,6 +435,7 @@ namespace WindowsControlerCliker
             this.label15.Size = new System.Drawing.Size(77, 15);
             this.label15.TabIndex = 24;
             this.label15.Text = "Coordenada Y";
+            this.label15.Visible = false;
             // 
             // label16
             // 
@@ -445,6 +446,7 @@ namespace WindowsControlerCliker
             this.label16.Size = new System.Drawing.Size(77, 15);
             this.label16.TabIndex = 23;
             this.label16.Text = "Coordenada X";
+            this.label16.Visible = false;
             // 
             // CoordY
             // 
@@ -489,6 +491,7 @@ namespace WindowsControlerCliker
             this.button5.TabIndex = 21;
             this.button5.Text = "Editar Estilos";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Visible = false;
             // 
             // button4
             // 
@@ -519,6 +522,7 @@ namespace WindowsControlerCliker
             this.button2.TabIndex = 18;
             this.button2.Text = "Guardar en .txt";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Visible = false;
             // 
             // label10
             // 
@@ -619,7 +623,6 @@ namespace WindowsControlerCliker
             // 
             // Actualizador
             // 
-            this.Actualizador.Enabled = true;
             this.Actualizador.Interval = 10;
             this.Actualizador.Tick += new System.EventHandler(this.Actualizador_Tick);
             // 
@@ -636,9 +639,11 @@ namespace WindowsControlerCliker
             this.ClientSize = new System.Drawing.Size(799, 448);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.AutoCliker);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.KeyPreview = true;
+            this.MaximizeBox = false;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "StadisticsInputs";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.SizeChanged += new System.EventHandler(this.Form1_SizeChanged);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);

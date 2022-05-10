@@ -20,6 +20,13 @@ namespace WindowsControlerCliker
   
     public partial class Form1 : Form
     {
+        int ContadorClickL = 0; //Click Izquierdo
+        int ContadorClickR = 0; //Click Derecho
+        int ContadorClickM = 0; //Click Central
+        int ContadorClickXB1 = 0; //Click boton extra 1 del mouse
+        int ContadorClickXB2 = 0; //Click boton extra 2 del mouse
+        int ContadorRueda = 0; //Rueda del raton
+        int ContadorTeclas = 0;
 
         //_____________________________________________________________________
         // Necesario para el uso de las teclas
@@ -150,7 +157,9 @@ namespace WindowsControlerCliker
 
                 // 4º linea TicsRueda
                 line = sr.ReadLine();
+                MH.RdR = MH.RdR + int.Parse(line);
                 ContadorRueda = ContadorRueda + int.Parse(line);
+                //MessageBox.Show("ContadorRueda: " + ContadorRueda.ToString() + "| line: " + line);
                 RuedaRatonCont.Text = ContadorRueda.ToString();
 
                 // 5º linea ClicksX1
@@ -170,20 +179,9 @@ namespace WindowsControlerCliker
 
             }
             sr.Close();
-
-           // Actualizador.Enabled = true;
+            
+            Actualizador.Enabled = true;
         }
-
-
-
-        //======================================================================
-        //======================================================================
-        //========== CONTADOR DE USOS DE TECLADO Y MOUSE =============
-        //======================================================================
-        //======================================================================
-
-
-
 
 
         //_____________________________________________________________________
@@ -195,7 +193,7 @@ namespace WindowsControlerCliker
         //======================================================================
 
 
-        int ContadorTeclas = 0;
+        
       
         private void Kh_KeyUp(object sender, System.Windows.Forms.KeyEventArgs e)
         {
@@ -511,12 +509,7 @@ namespace WindowsControlerCliker
             }
         }
 
-        int ContadorClickL = 0; //Click Izquierdo
-        int ContadorClickR = 0; //Click Derecho
-        int ContadorClickM = 0; //Click Central
-        int ContadorClickXB1 = 0; //Click boton extra 1 del mouse
-        int ContadorClickXB2 = 0; //Click boton extra 2 del mouse
-        int ContadorRueda = 0; //Rueda del raton
+       
 
 
         private void Actualizador_Tick(object sender, EventArgs e)
@@ -541,6 +534,15 @@ namespace WindowsControlerCliker
             //ClicksExtra1Cont.Text = ContadorClickXB2.ToString();
 
 
+            // 1º linea ClicksIzquirdos
+            // 2º linea ClicksDerechos
+            // 3º linea ClicksCentrales
+            // 4º linea TicsRueda
+            // 5º linea ClicksX1
+            // 6º linea ClicksX2
+            // 7º linea PulsacionesTeclado
+
+            //Actualizador de datos en el archivo
             StreamWriter stream = new StreamWriter("C:\\juegos\\Info.txt");
             stream.WriteLine(ContadorClickL.ToString());
             stream.WriteLine(ContadorClickR.ToString());
