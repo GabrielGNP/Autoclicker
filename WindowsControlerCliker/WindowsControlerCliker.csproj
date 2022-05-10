@@ -55,6 +55,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Users\USUARIO\source\repos\KeysDetectorSegundoPlano\KeysDetectorSegundoPlano\bin\Debug\KeysDetectorSegundoPlano.dll</HintPath>
     </Reference>
+    <Reference Include="MouseKeyboardLibrary">
+      <HintPath>C:\Users\USUARIO\Downloads\MouseKeyboardLibrary\MouseKeyboardLibrary\bin\Debug\MouseKeyboardLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />

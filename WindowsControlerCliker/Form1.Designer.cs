@@ -72,8 +72,8 @@ namespace WindowsControlerCliker
             this.abrirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.minimizarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cerrarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.Actualizador = new System.Windows.Forms.Timer(this.components);
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.AutoCliker.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CPSIngreser)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -461,6 +461,7 @@ namespace WindowsControlerCliker
             this.CoordY.TabIndex = 22;
             this.CoordY.Text = "label14";
             this.CoordY.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.CoordY.Visible = false;
             // 
             // CoordX
             // 
@@ -477,6 +478,7 @@ namespace WindowsControlerCliker
             this.CoordX.TabIndex = 13;
             this.CoordX.Text = "label13";
             this.CoordX.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.CoordX.Visible = false;
             // 
             // button5
             // 
@@ -615,16 +617,15 @@ namespace WindowsControlerCliker
             this.cerrarToolStripMenuItem.Text = "Cerrar";
             this.cerrarToolStripMenuItem.Click += new System.EventHandler(this.cerrarToolStripMenuItem_Click);
             // 
-            // backgroundWorker1
-            // 
-            this.backgroundWorker1.WorkerSupportsCancellation = true;
-            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
-            // 
             // Actualizador
             // 
             this.Actualizador.Enabled = true;
             this.Actualizador.Interval = 10;
             this.Actualizador.Tick += new System.EventHandler(this.Actualizador_Tick);
+            // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             // 
             // Form1
             // 
@@ -684,7 +685,6 @@ namespace WindowsControlerCliker
         private System.Windows.Forms.ToolStripMenuItem abrirToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem minimizarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cerrarToolStripMenuItem;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.NumericUpDown CPSIngreser;
         private System.Windows.Forms.Label ClicksDerechoCont;
         private System.Windows.Forms.Label ClicksIzquierdoCont;
@@ -697,6 +697,7 @@ namespace WindowsControlerCliker
         private System.Windows.Forms.Timer Actualizador;
         private System.Windows.Forms.CheckBox ControlActivate;
         private System.Windows.Forms.CheckBox ShiftActivate;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
 
