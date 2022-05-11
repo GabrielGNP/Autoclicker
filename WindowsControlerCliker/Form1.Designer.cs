@@ -74,6 +74,7 @@ namespace WindowsControlerCliker
             this.cerrarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Actualizador = new System.Windows.Forms.Timer(this.components);
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.AutoCliker.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CPSIngreser)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -299,7 +300,7 @@ namespace WindowsControlerCliker
             this.groupBox1.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.groupBox1.Location = new System.Drawing.Point(257, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(531, 426);
+            this.groupBox1.Size = new System.Drawing.Size(400, 426);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Contador";
@@ -430,7 +431,7 @@ namespace WindowsControlerCliker
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Arial Unicode MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(123, 199);
+            this.label15.Location = new System.Drawing.Point(123, 208);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(77, 15);
             this.label15.TabIndex = 24;
@@ -441,7 +442,7 @@ namespace WindowsControlerCliker
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Arial Unicode MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(123, 171);
+            this.label16.Location = new System.Drawing.Point(123, 180);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(77, 15);
             this.label16.TabIndex = 23;
@@ -455,7 +456,7 @@ namespace WindowsControlerCliker
             this.CoordY.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.CoordY.Font = new System.Drawing.Font("Arial Unicode MS", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CoordY.ForeColor = System.Drawing.Color.Blue;
-            this.CoordY.Location = new System.Drawing.Point(16, 196);
+            this.CoordY.Location = new System.Drawing.Point(16, 205);
             this.CoordY.MaximumSize = new System.Drawing.Size(100, 18);
             this.CoordY.MinimumSize = new System.Drawing.Size(100, 18);
             this.CoordY.Name = "CoordY";
@@ -472,7 +473,7 @@ namespace WindowsControlerCliker
             this.CoordX.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.CoordX.Font = new System.Drawing.Font("Arial Unicode MS", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CoordX.ForeColor = System.Drawing.Color.Blue;
-            this.CoordX.Location = new System.Drawing.Point(16, 169);
+            this.CoordX.Location = new System.Drawing.Point(16, 178);
             this.CoordX.MaximumSize = new System.Drawing.Size(100, 18);
             this.CoordX.MinimumSize = new System.Drawing.Size(100, 18);
             this.CoordX.Name = "CoordX";
@@ -558,7 +559,7 @@ namespace WindowsControlerCliker
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Arial Unicode MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(382, 32);
+            this.label7.Location = new System.Drawing.Point(267, 55);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(119, 15);
             this.label7.TabIndex = 11;
@@ -630,13 +631,18 @@ namespace WindowsControlerCliker
             // 
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(799, 448);
+            this.ClientSize = new System.Drawing.Size(670, 451);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.AutoCliker);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -644,6 +650,7 @@ namespace WindowsControlerCliker
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "StadisticsInputs";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.SizeChanged += new System.EventHandler(this.Form1_SizeChanged);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
@@ -703,6 +710,7 @@ namespace WindowsControlerCliker
         private System.Windows.Forms.CheckBox ControlActivate;
         private System.Windows.Forms.CheckBox ShiftActivate;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 
