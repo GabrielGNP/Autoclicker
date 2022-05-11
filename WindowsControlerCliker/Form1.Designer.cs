@@ -74,7 +74,6 @@ namespace WindowsControlerCliker
             this.cerrarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Actualizador = new System.Windows.Forms.Timer(this.components);
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.AutoCliker.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CPSIngreser)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -631,11 +630,6 @@ namespace WindowsControlerCliker
             // 
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             // 
-            // timer1
-            // 
-            this.timer1.Enabled = true;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -710,7 +704,6 @@ namespace WindowsControlerCliker
         private System.Windows.Forms.CheckBox ControlActivate;
         private System.Windows.Forms.CheckBox ShiftActivate;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private System.Windows.Forms.Timer timer1;
     }
 }
 

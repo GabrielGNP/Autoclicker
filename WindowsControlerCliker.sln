@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.32002.261
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsControlerCliker", "WindowsControlerCliker\WindowsControlerCliker.csproj", "{554C6167-92CA-4DA3-ADF7-DB3179214434}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Installer", "Installer\Installer.vdproj", "{EB965A56-B68C-4F61-A119-67BA21EE775A}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,8 +15,6 @@ Global
 		{554C6167-92CA-4DA3-ADF7-DB3179214434}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{554C6167-92CA-4DA3-ADF7-DB3179214434}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{554C6167-92CA-4DA3-ADF7-DB3179214434}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EB965A56-B68C-4F61-A119-67BA21EE775A}.Debug|Any CPU.ActiveCfg = Debug
-		{EB965A56-B68C-4F61-A119-67BA21EE775A}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

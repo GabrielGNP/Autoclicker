@@ -54,10 +54,10 @@ namespace WindowsControlerCliker
             KH.KeyDown += Kh_KeyDown;
             KH.KeyUp += Kh_KeyUp;
 
-           //MH.ClickDown += MH_ClickDown;
-           MH.ClickUp += MH_ClickUp;
+            //MH.ClickDown += MH_ClickDown;
+            //MH.ClickUp += MH_ClickUp;
+            MH.ClickUp += MH_ClickUp;
 
-            
 
        
 
@@ -98,21 +98,23 @@ namespace WindowsControlerCliker
         private void Form1_Load(object sender, EventArgs e)
         {
             CheckForIllegalCrossThreadCalls = false;
-            
+        //    Thread AC = new Thread(AutoClick);
+        //    AC.Start(); //Inicia el proceso autoclicker
             backgroundWorker1.RunWorkerAsync();
             //Thread AC = new Thread(AutoClick);
             //AC.Start(); Si esto se hace aumenta MUCHISIMO el consumo del procesador al ejecutar el programa. Aumenta el consumo a un 28% para ser más exacto
 
+            
             if (Cargar)
             {
                 Cargar = false;
                 if (File.Exists("C:\\juegos\\Info.txt")) //Comprueba si el archivo existe
                 {
                     //MessageBox.Show("Se va a leer el archivo para cargar los datos");
-                    //LecturaDeDatos();
+                    LecturaDeDatos();
                     MH.RdR = ContadorRueda;
-                    MessageBox.Show("Se a leido el archivo");
-                    MessageBox.Show("Ahora salta error");
+                    //MessageBox.Show("Se a leido el archivo");
+                    //MessageBox.Show("Ahora salta error");
                     Actualizador.Enabled = true;
 
                 }
@@ -123,16 +125,16 @@ namespace WindowsControlerCliker
                     MessageBox.Show("Se a creado un nuevo archivo");
                     stream.Close();
                 }
-                MessageBox.Show("Termina la carga de datos");
+                //MessageBox.Show("Termina la carga de datos");
             }
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             EscrituraDeDatos();
-            MessageBox.Show("Se han escrito los datos en el archivo");
+           // MessageBox.Show("Se han escrito los datos en el archivo");
         }
-
+        
         String line;
         private void LecturaDeDatos()
         {
@@ -144,79 +146,53 @@ namespace WindowsControlerCliker
             // 6º linea ClicksX2
             // 7º linea PulsacionesTeclado
 
-            //MessageBox.Show("busca el archivo y lo guarda en la variable SR");
             StreamReader sr = new StreamReader("C:\\juegos\\Info.txt");
-            //MessageBox.Show("Obtiene la primera linea");
             line = sr.ReadLine();
             if (line != null)
             {
-                MessageBox.Show("Hay datos en el archivo");
+                //MessageBox.Show("Hay datos en el archivo");
                 // 1º linea ClicksIzquirdos
                 ContadorClickL = ContadorClickL + int.Parse(line);
-                //ClicksIzquierdoCont.Text = ContadorClickL.ToString();
-              //  MessageBox.Show("Guarda la primera linea");
 
                 // 2º linea ClicksDerechos
                 line = sr.ReadLine();
                 if (line != null)
                 {
-                    //  MessageBox.Show("Obtiene la segunda linea");
                     ContadorClickR = ContadorClickR + int.Parse(line);
-                   // ClicksDerechoCont.Text = ContadorClickR.ToString();
-                    //  MessageBox.Show("Guarda la segunda linea");
 
                     // 3º linea ClicksCentrales
                     line = sr.ReadLine();
                     if (line != null)
                     {
-                        //  MessageBox.Show("Obtiene la tercera linea");
                         ContadorClickM = ContadorClickM + int.Parse(line);
-                        //ClicksCentralCont.Text = ContadorClickM.ToString();
-                       // MessageBox.Show("line:" + line);
 
                         // 4º linea TicsRueda
                         line = sr.ReadLine();
                         if (line != null)
                         {
-                            // MessageBox.Show("Obtiene la cuarta linea");
-                            //MH.RdR = MH.RdR + int.Parse(line);
                             ContadorRueda = ContadorRueda + int.Parse(line);
-                            //MessageBox.Show("ContadorRueda: " + ContadorRueda.ToString() + "| line: " + line);
-                            //RuedaRatonCont.Text = MH.RdR.ToString();
-                            MessageBox.Show("line:" + line);
-                            // MessageBox.Show("Guarda la cuarta linea");
 
                             // 5º linea ClicksX1
                             line = sr.ReadLine();
                             if (line != null)
                             {
-                                // MessageBox.Show("Obtiene la quinta linea");
                                 ContadorClickXB1 = ContadorClickXB1 + int.Parse(line);
-                               // ClicksExtra1Cont.Text = ContadorClickXB1.ToString();
-                                //MessageBox.Show("Guarda la quinta linea");
 
                                 // 6º linea ClicksX2
                                 line = sr.ReadLine();
                                 if (line != null)
                                 {
-                                    //MessageBox.Show("Obtiene la sexta linea");
                                     ContadorClickXB2 = ContadorClickXB2 + int.Parse(line);
-                                    //ClicksExtra2Cont.Text = ContadorClickXB2.ToString();
-                                    // MessageBox.Show("Guarda la sexta  linea");
 
                                     // 7º linea PulsacionesTeclado
                                     line = sr.ReadLine();
                                     if (line != null)
                                     {
-                                        //MessageBox.Show("Obtiene la septima linea");
                                         ContadorTeclas = ContadorTeclas + int.Parse(line);
-                                        //PulsacionTeclaCont.Text = ContadorTeclas.ToString();
-                                        //MessageBox.Show("Guarda la septima  linea");
                                     }
                                     else
                                     {
                                         ContadorTeclas = ContadorTeclas + 0;
-                                        /*PulsacionTeclaCont.Text = ContadorTeclas.ToString();*/
                                     }
 
                                 }
@@ -224,10 +200,7 @@ namespace WindowsControlerCliker
                                 {
                                     ContadorClickXB2 = ContadorClickXB2 + 0;
                                     ContadorTeclas = ContadorTeclas + 0;
-                                    /*
-                                    ClicksExtra2Cont.Text = ContadorClickXB2.ToString();
-                                    PulsacionTeclaCont.Text = ContadorTeclas.ToString();*/
-                                    
+
                                 }
                             }
                             else
@@ -235,10 +208,8 @@ namespace WindowsControlerCliker
                                 ContadorClickXB1 = ContadorClickXB1 + 0;
                                 ContadorClickXB2 = ContadorClickXB2 + 0;
                                 ContadorTeclas = ContadorTeclas + 0;
-                                /*
-                                ClicksExtra1Cont.Text = ContadorClickXB1.ToString();
-                                ClicksExtra2Cont.Text = ContadorClickXB2.ToString();
-                                PulsacionTeclaCont.Text = ContadorTeclas.ToString();*/
+                                
+
                             }
                         }
                         else
@@ -247,11 +218,8 @@ namespace WindowsControlerCliker
                             ContadorClickXB1 = ContadorClickXB1 + 0;
                             ContadorClickXB2 = ContadorClickXB2 + 0;
                             ContadorTeclas = ContadorTeclas + 0;
-                            /*
-                            RuedaRatonCont.Text = MH.RdR.ToString();
-                            ClicksExtra1Cont.Text = ContadorClickXB1.ToString();
-                            ClicksExtra2Cont.Text = ContadorClickXB2.ToString();
-                            PulsacionTeclaCont.Text = ContadorTeclas.ToString();*/
+                            
+
                         }
                     }
                     else
@@ -261,12 +229,8 @@ namespace WindowsControlerCliker
                         ContadorClickXB1 = ContadorClickXB1 + 0;
                         ContadorClickXB2 = ContadorClickXB2 + 0;
                         ContadorTeclas = ContadorTeclas + 0;
-                        /*
-                        ClicksCentralCont.Text = ContadorClickM.ToString();
-                        RuedaRatonCont.Text = MH.RdR.ToString();
-                        ClicksExtra1Cont.Text = ContadorClickXB1.ToString();
-                        ClicksExtra2Cont.Text = ContadorClickXB2.ToString();
-                        PulsacionTeclaCont.Text = ContadorTeclas.ToString();*/
+                        
+
                     }
                 }
                 else
@@ -277,13 +241,8 @@ namespace WindowsControlerCliker
                     ContadorClickXB1 = ContadorClickXB1 + 0;
                     ContadorClickXB2 = ContadorClickXB2 + 0;
                     ContadorTeclas = ContadorTeclas + 0;
-                    /*
-                    ClicksDerechoCont.Text = ContadorClickR.ToString();
-                    ClicksCentralCont.Text = ContadorClickM.ToString();
-                    RuedaRatonCont.Text = MH.RdR.ToString();
-                    ClicksExtra1Cont.Text = ContadorClickXB1.ToString();
-                    ClicksExtra2Cont.Text = ContadorClickXB2.ToString();
-                    PulsacionTeclaCont.Text = ContadorTeclas.ToString();*/
+                    
+
                 }
             }
             else
@@ -295,14 +254,7 @@ namespace WindowsControlerCliker
                 ContadorClickXB1 = ContadorClickXB1 + 0;
                 ContadorClickXB2 = ContadorClickXB2 + 0;
                 ContadorTeclas = ContadorTeclas + 0;
-                /*
-                ClicksIzquierdoCont.Text = ContadorClickL.ToString();
-                ClicksDerechoCont.Text = ContadorClickR.ToString();
-                ClicksCentralCont.Text = ContadorClickM.ToString();
-                RuedaRatonCont.Text = MH.RdR.ToString();
-                ClicksExtra1Cont.Text = ContadorClickXB1.ToString();
-                ClicksExtra2Cont.Text = ContadorClickXB2.ToString();
-                PulsacionTeclaCont.Text = ContadorTeclas.ToString();*/
+
             }
             ClicksIzquierdoCont.Text = ContadorClickL.ToString();
             ClicksDerechoCont.Text = ContadorClickR.ToString();
@@ -311,11 +263,9 @@ namespace WindowsControlerCliker
             ClicksExtra1Cont.Text = ContadorClickXB1.ToString();
             ClicksExtra2Cont.Text = ContadorClickXB2.ToString();
             PulsacionTeclaCont.Text = ContadorTeclas.ToString();
-            MessageBox.Show("lectura completa, va a cerrar el documento");
+            //MessageBox.Show("lectura completa, va a cerrar el documento");
             sr.Close();
-            //MessageBox.Show("a cerrado el documento");
-            //Thread.Sleep(100);
-            MessageBox.Show("activa el actualizador");
+            Actualizador.Enabled = true;
             
         }
 
@@ -445,9 +395,13 @@ namespace WindowsControlerCliker
                         //(1000 / (int.Parse(intervals.ToString()))).ToString();
                     CountClicks++;
                     ClicksHechos.Text = CountClicks.ToString();
-                    
+
                 }
-                //Thread.Sleep(2);
+                else
+                {
+                    Thread.Sleep(1000);
+                }
+
             }
         }
 
@@ -456,8 +410,10 @@ namespace WindowsControlerCliker
         {
            
 
-           // Thread AC = new Thread(AutoClick);
-            //AC.Start(); //Inicia el proceso autoclicker
+            Thread AC = new Thread(AutoClick);
+            //AC.IsBackground = true;
+            AC.Start(); //Inicia el proceso autoclicker
+            AC.Interrupt();
             //AC.Suspend(); //Suspende el proceso autoclicker. Esto hace que no se esté ejecutando constantemente sin hacer nada
             while (true)
              {
@@ -477,7 +433,8 @@ namespace WindowsControlerCliker
                              {
                                  Thread.Sleep(100);
                                  Click = false;
-                                // AC.Suspend(); //Suspende el proceso autoclicker. Esto hace que no se esté ejecutando constantemente sin hacer nada
+                                //AC.Suspend(); //Suspende el proceso autoclicker. Esto hace que no se esté ejecutando constantemente sin hacer nada
+                                AC.Interrupt();
 
                                 //MessageBox.Show("inactivo");
                                 IndicadorDeActividad.ForeColor = Color.OrangeRed;
@@ -492,7 +449,7 @@ namespace WindowsControlerCliker
                                  //MessageBox.Show("activo");
                                  CountClicks = 0;
                                  Click = true;
-                               // AC.Resume(); //Reanuda el proceso autoclicker 
+                                AC.Resume(); //Reanuda el proceso autoclicker 
 
                                 IndicadorDeActividad.ForeColor = Color.Lime;
                                  IndicadorDeActividad.Text = "| ACTIVO |";
@@ -506,7 +463,9 @@ namespace WindowsControlerCliker
                              {
                                  Thread.Sleep(100);
                                  Click = false;
-                                // AC.Suspend(); //Suspende el proceso autoclicker. Esto hace que no se esté ejecutando constantemente sin hacer nada
+                                 //AC.Suspend(); //Suspende el proceso autoclicker. Esto hace que no se esté ejecutando constantemente sin hacer nada
+                                AC.Interrupt();
+
                                 //MessageBox.Show("inactivo");
                                 IndicadorDeActividad.ForeColor = Color.OrangeRed;
                                  IndicadorDeActividad.Text = "| INACTIVO |";
@@ -519,7 +478,7 @@ namespace WindowsControlerCliker
                                  //MessageBox.Show("activo");
                                  CountClicks = 0;
                                  Click = true;
-                               // AC.Resume(); //Reanuda el proceso deautoclicker
+                                AC.Resume(); //Reanuda el proceso deautoclicker
                                 IndicadorDeActividad.ForeColor = Color.Lime;
                                  IndicadorDeActividad.Text = "| ACTIVO |";
                              }
@@ -534,8 +493,10 @@ namespace WindowsControlerCliker
                                  Click == true)
                              {
                                  Thread.Sleep(100);
-                                 Click = false; 
-                                //AC.Suspend(); //Suspende el proceso autoclicker. Esto hace que no se esté ejecutando constantemente sin hacer nada
+                                 Click = false;
+                                // AC.Suspend(); //Suspende el proceso autoclicker. Esto hace que no se esté ejecutando constantemente sin hacer nada
+                                AC.Interrupt();
+
                                 //MessageBox.Show("inactivo");
                                 IndicadorDeActividad.ForeColor = Color.OrangeRed;
                                  IndicadorDeActividad.Text = "| INACTIVO |";
@@ -548,7 +509,7 @@ namespace WindowsControlerCliker
                                  //MessageBox.Show("activo");
                                  CountClicks = 0;
                                  Click = true;
-                               // AC.Resume(); //Reanuda el proceso deautoclicker
+                                AC.Resume(); //Reanuda el proceso deautoclicker
                                 IndicadorDeActividad.ForeColor = Color.Lime;
                                  IndicadorDeActividad.Text = "| ACTIVO |";
                              }
@@ -559,7 +520,8 @@ namespace WindowsControlerCliker
                              {
                                  Thread.Sleep(100);
                                  Click = false;
-                               // AC.Suspend(); //Suspende el proceso autoclicker. Esto hace que no se esté ejecutando constantemente sin hacer nada
+                                // AC.Suspend(); //Suspende el proceso autoclicker. Esto hace que no se esté ejecutando constantemente sin hacer nada
+                                AC.Interrupt();
 
                                 //MessageBox.Show("inactivo");
                                 IndicadorDeActividad.ForeColor = Color.OrangeRed;
@@ -571,7 +533,7 @@ namespace WindowsControlerCliker
                                  //MessageBox.Show("activo");
                                  CountClicks = 0;
                                  Click = true;
-                               // AC.Resume(); //Reanuda el proceso deautoclicker
+                                AC.Resume(); //Reanuda el proceso deautoclicker
                                 IndicadorDeActividad.ForeColor = Color.Lime;
                                  IndicadorDeActividad.Text = "| ACTIVO |";
                              }
@@ -685,33 +647,13 @@ namespace WindowsControlerCliker
             // 7º linea PulsacionesTeclado
 
             //Actualizador de datos en el archivo
-            //MessageBox.Show("Inicia escritura en archivo");
-            //EscrituraDeDatos();
-            //Thread.Sleep(10);
+            EscrituraDeDatos();
 
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            if (Click == true)
-            {
-
-                mouse_event(dwFlags: LEFTDOWN, dx: 0, dy: 0, cButtons: 0, dwExtraInfo: 0);
-                Thread.Sleep(1);
-                mouse_event(dwFlags: LEFTUP, dx: 0, dy: 0, cButtons: 0, dwExtraInfo: 0);
-                ContadorClickL--;
-                Thread.Sleep(787 / (int.Parse(intervals.ToString())));
-
-                //(1000 / (int.Parse(intervals.ToString()))).ToString();
-                CountClicks++;
-                ClicksHechos.Text = CountClicks.ToString();
-
-            }
-        }
-
+        
         private void EscrituraDeDatos()
         {
-            //MessageBox.Show("Se han escrito los datos en el archivo");
             if (File.Exists("C:\\juegos\\Info.txt")) //Comprueba si el archivo existe
             {
                 StreamWriter stream = new StreamWriter("C:\\juegos\\Info.txt");
