@@ -38,11 +38,40 @@ namespace WindowsControlerCliker
 
         KeysDetectorSP KH = new KeysDetectorSP();
         MouseDetectorSP MH = new MouseDetectorSP();
-   
 
-       
+        /*
+        ManualResetEvent _shutdownEvent = new ManualResetEvent(false);
+        ManualResetEvent _pauseEvent = new ManualResetEvent(true); 
+        Thread _thread; 
+        public Form1() { 
+        }
+        public void Start() {
+            _thread = new Thread(DoWork); _thread.Start(); 
+        }
+        public void Pause() { _pauseEvent.Reset(); }
+        public void Resume() { _pauseEvent.Set(); }
+        public void Stop()
+        {
+            // Signal the shutdown event
+            _shutdownEvent.Set(); 
 
-        bool ctrl, shift;
+            // Make sure to resume any paused threads
+           _pauseEvent.Set(); 
+            // Wait for the thread to exit
+            _thread.Join(); 
+        } 
+    public void DoWork() {
+        while (true) 
+        {
+            _pauseEvent.WaitOne(Timeout.Infinite);
+            if (_shutdownEvent.WaitOne(0)) 
+                break; // Do the work..
+        }
+    }
+        */
+        
+
+            bool ctrl, shift;
  
 
         public Form1()
@@ -59,10 +88,14 @@ namespace WindowsControlerCliker
             MH.ClickUp += MH_ClickUp;
 
 
-       
+            //disparo += AutoClick;
 
+            
 
         }
+
+
+        event EventHandler disparo;
 
         private void MH_ClickUp(object sender, MouseEventArgs e)
         {
@@ -93,18 +126,21 @@ namespace WindowsControlerCliker
                 
             }
         }
-
+        
         bool Cargar = true;
+
         private void Form1_Load(object sender, EventArgs e)
         {
             CheckForIllegalCrossThreadCalls = false;
-            Thread AC = new Thread(AutoClick);
-            AC.Start(); //Inicia el proceso autoclicker
+            //Thread AC = new Thread(AutoClick);
+            //Thread t = new Thread(new ThreadStart(AutoClick));
+            //AC.Start(); //Inicia el proceso autoclicker
             backgroundWorker1.RunWorkerAsync();
             //Thread AC = new Thread(AutoClick);
             //AC.Start(); Si esto se hace aumenta MUCHISIMO el consumo del procesador al ejecutar el programa. Aumenta el consumo a un 28% para ser más exacto
 
-            
+            //Task.Run()
+                
             if (Cargar)
             {
                 Cargar = false;
@@ -379,8 +415,9 @@ namespace WindowsControlerCliker
         KeysConverter Key = new KeysConverter();
 
        
-        private void AutoClick()
+        private void AutoClick (/*object sender, EventArgs e*/)
         {
+            //MessageBox.Show("cosa");
             while (true)
             {
                 if (Click == true)
@@ -399,24 +436,31 @@ namespace WindowsControlerCliker
                 }
                 else
                 {
+                     //MessageBox.Show("Termina");
+                    // return;
+                   // break;
                     //Thread.Sleep(1000);
                 }
 
             }
         }
-
+        
+        
         //===== ===== ===== ===== Detecta el presionar las teclas fuera del form ===== ===== ===== =====
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-           
-
+            
+            //Task AtCl = new Task(AutoClick);
             //Thread AC = new Thread(AutoClick);
+            //AC.Start();
+            //AC.Abort();
+           // AtCl.Start();
             //AC.IsBackground = true;
-            //AC.Start(); //Inicia el proceso autoclicker
+            //Inicia el proceso autoclicker
             //AC.Interrupt();
             //AC.Suspend(); //Suspende el proceso autoclicker. Esto hace que no se esté ejecutando constantemente sin hacer nada
             while (true)
-             {
+            {
                  if (CheckActivar.Checked && CambiarTecla == false && ActivadorClick.Checked)
                  {
                      //Es una funcion para detectar las teclas. Al no ejecutarse al tocar una tecla en el
@@ -435,7 +479,9 @@ namespace WindowsControlerCliker
                                  Click = false;
                                 //AC.Suspend(); //Suspende el proceso autoclicker. Esto hace que no se esté ejecutando constantemente sin hacer nada
                                 //AC.Interrupt();
-
+                                //AC.Abort();
+                                backgroundWorker2.CancelAsync();
+                                //disparo.EndInvoke(null);
                                 //MessageBox.Show("inactivo");
                                 IndicadorDeActividad.ForeColor = Color.OrangeRed;
                                  IndicadorDeActividad.Text = "| INACTIVO |";
@@ -449,6 +495,10 @@ namespace WindowsControlerCliker
                                  //MessageBox.Show("activo");
                                  CountClicks = 0;
                                  Click = true;
+                                //disparo.Invoke(null, null);
+                                //AC.Start();
+                                backgroundWorker2.RunWorkerAsync();
+                                //AtCl.Start();
                                 //AC.Resume(); //Reanuda el proceso autoclicker 
 
                                 IndicadorDeActividad.ForeColor = Color.Lime;
@@ -463,9 +513,11 @@ namespace WindowsControlerCliker
                              {
                                  Thread.Sleep(100);
                                  Click = false;
-                                 //AC.Suspend(); //Suspende el proceso autoclicker. Esto hace que no se esté ejecutando constantemente sin hacer nada
-                               // AC.Interrupt();
-
+                                //AC.Suspend(); //Suspende el proceso autoclicker. Esto hace que no se esté ejecutando constantemente sin hacer nada
+                                // AC.Interrupt();
+                                //AC.Abort();
+                                backgroundWorker2.CancelAsync();
+                                //disparo.EndInvoke(null);
                                 //MessageBox.Show("inactivo");
                                 IndicadorDeActividad.ForeColor = Color.OrangeRed;
                                  IndicadorDeActividad.Text = "| INACTIVO |";
@@ -478,7 +530,11 @@ namespace WindowsControlerCliker
                                  //MessageBox.Show("activo");
                                  CountClicks = 0;
                                  Click = true;
-                               // AC.Resume(); //Reanuda el proceso deautoclicker
+                                // AC.Resume(); //Reanuda el proceso deautoclicker
+                                //disparo.Invoke(null, null);
+                                backgroundWorker2.RunWorkerAsync();
+                                //AC.Start();
+                                // AtCl.Start();
                                 IndicadorDeActividad.ForeColor = Color.Lime;
                                  IndicadorDeActividad.Text = "| ACTIVO |";
                              }
@@ -495,8 +551,10 @@ namespace WindowsControlerCliker
                                  Thread.Sleep(100);
                                  Click = false;
                                 // AC.Suspend(); //Suspende el proceso autoclicker. Esto hace que no se esté ejecutando constantemente sin hacer nada
-                               // AC.Interrupt();
-
+                                // AC.Interrupt();
+                                // AC.Abort();
+                                backgroundWorker2.CancelAsync();
+                                //disparo.EndInvoke(null);
                                 //MessageBox.Show("inactivo");
                                 IndicadorDeActividad.ForeColor = Color.OrangeRed;
                                  IndicadorDeActividad.Text = "| INACTIVO |";
@@ -509,7 +567,11 @@ namespace WindowsControlerCliker
                                  //MessageBox.Show("activo");
                                  CountClicks = 0;
                                  Click = true;
-                              //  AC.Resume(); //Reanuda el proceso deautoclicker
+                                //AC.Start();
+                                backgroundWorker2.RunWorkerAsync();
+                                //AtCl.Start();
+                                //disparo.Invoke(null, null);
+                                //  AC.Resume(); //Reanuda el proceso deautoclicker
                                 IndicadorDeActividad.ForeColor = Color.Lime;
                                  IndicadorDeActividad.Text = "| ACTIVO |";
                              }
@@ -521,8 +583,11 @@ namespace WindowsControlerCliker
                                  Thread.Sleep(100);
                                  Click = false;
                                 // AC.Suspend(); //Suspende el proceso autoclicker. Esto hace que no se esté ejecutando constantemente sin hacer nada
-                               // AC.Interrupt();
-
+                                // AC.Interrupt();
+                                // AC.Abort();
+                                backgroundWorker2.CancelAsync();
+                                
+                                //disparo.EndInvoke(null);
                                 //MessageBox.Show("inactivo");
                                 IndicadorDeActividad.ForeColor = Color.OrangeRed;
                                  IndicadorDeActividad.Text = "| INACTIVO |";
@@ -533,6 +598,10 @@ namespace WindowsControlerCliker
                                  //MessageBox.Show("activo");
                                  CountClicks = 0;
                                  Click = true;
+                                //  AC.Start();
+                                backgroundWorker2.RunWorkerAsync();
+                                //AtCl.Start();
+                                // disparo.Invoke(null, null);
                                 //AC.Resume(); //Reanuda el proceso deautoclicker
                                 IndicadorDeActividad.ForeColor = Color.Lime;
                                  IndicadorDeActividad.Text = "| ACTIVO |";
@@ -651,7 +720,43 @@ namespace WindowsControlerCliker
 
         }
 
-        
+        private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
+        {
+            //MessageBox.Show("Termina");
+            
+            while (true)
+            {
+                BackgroundWorker worker = sender as BackgroundWorker;
+                if (worker.CancellationPending == true)
+                {
+                    e.Cancel = true;
+                    //MessageBox.Show("Cancelado");
+                    break;
+                }
+                else
+                {
+                    if (Click == true)
+                    {
+
+                        mouse_event(dwFlags: LEFTDOWN, dx: 0, dy: 0, cButtons: 0, dwExtraInfo: 0);
+                        Thread.Sleep(1);
+                        mouse_event(dwFlags: LEFTUP, dx: 0, dy: 0, cButtons: 0, dwExtraInfo: 0);
+                        ContadorClickL--;
+                        Thread.Sleep(784 / (int.Parse(intervals.ToString())));
+
+                        //(1000 / (int.Parse(intervals.ToString()))).ToString();
+                        CountClicks++;
+                        ClicksHechos.Text = CountClicks.ToString();
+                    }
+                    else
+                    {
+                        //MessageBox.Show("Termina");
+                        break;
+                    }
+                }
+            }
+        }
+
         private void EscrituraDeDatos()
         {
             if (File.Exists("C:\\juegos\\Info.txt")) //Comprueba si el archivo existe
